@@ -24,6 +24,7 @@
     color: white;
     padding: 40px 30px;
     text-align: center;
+    position: relative;
   }
   header h1 {
     font-size: 2.5em;
@@ -260,6 +261,10 @@
 </style>
 </head>
 <body>
+
+<!-- Audio Latar Belakang (Looping) -->
+<audio id="bgAudio" src="https://cdn.jsdelivr.net/gh/faudyadam77-tech/Suara-solat@main/alkafirun.mp3" loop></audio>
+
 <div class="container">
   <header>
     <h1>الزِّي الْمَدْرَسِيُّ</h1>
@@ -280,11 +285,11 @@
       <div class="vocab-grid">
         <div class="vocab-card" onclick="speak('قَمِيصٌ')">
           <div class="vocab-image">
-            <img src="https://cdn.jsdelivr.net/gh/faudyadam77-tech/Kumpulan-gambar@main/baju.jpg" alt="baju Putih">
+            <img src="https://cdn.jsdelivr.net/gh/faudyadam77-tech/Kumpulan-gambar@main/baju.jpg" alt="Kemeja Putih">
           </div>
           <div class="arabic-word">قَمِيصٌ</div>
           <div class="latin-word">Qamiishun</div>
-          <div class="meaning">kemeja / Baju</div>
+          <div class="meaning">Kemeja / Baju</div>
         </div>
         <div class="vocab-card" onclick="speak('سِرْوَالٌ')">
           <div class="vocab-image">
@@ -313,7 +318,7 @@
       <div class="sentence-box">
         <div class="sentence-arabic">هَذَا قَمِيصٌ</div>
         <div class="sentence-latin">Haa-dzaa qamiishun</div>
-        <div class="sentence-meaning">Ini adalah baju.</div>
+        <div class="sentence-meaning">Ini adalah kemeja.</div>
       </div>
 
       <div class="sentence-box">
@@ -331,7 +336,7 @@
       <div style="background:#fff3e0; padding:20px; border-radius:10px; margin-top:25px; border-left:5px solid #ff9800;">
         <strong style="color:#e65100;">Catatan Penting:</strong>
         <p style="margin-top:10px; color:#555;">
-          Gunakan <strong>هَذَا</strong> (Haa-dzaa) untuk benda laki-laki seperti baju dan celana.<br>
+          Gunakan <strong>هَذَا</strong> (Haa-dzaa) untuk benda laki-laki seperti kemeja dan celana.<br>
           Gunakan <strong>هَذِهِ</strong> (Haa-dzihi) untuk benda perempuan seperti rok.
         </p>
       </div>
@@ -356,11 +361,33 @@
 </div>
 
 <script>
+  // --- PENGATURAN AUDIO LATAR BELAKANG ---
+  window.addEventListener('load', () => {
+    const audio = document.getElementById('bgAudio');
+    audio.volume = 0.3; // Atur volume ke 30% agar tidak terlalu keras
+    
+    // Coba putar otomatis
+    const playPromise = audio.play();
+    
+    if (playPromise !== undefined) {
+      playPromise.catch(error => {
+        // Jika diblokir browser, putar saat pengguna pertama kali mengklik di mana saja
+        const startAudio = () => {
+          audio.play();
+          document.removeEventListener('click', startAudio);
+          document.removeEventListener('touchstart', startAudio);
+        };
+        document.addEventListener('click', startAudio, { once: true });
+        document.addEventListener('touchstart', startAudio, { once: true });
+      });
+    }
+  });
+
   const questions = [
     {
       q: "Apa arti dari kata berikut?",
       arabic: "قَمِيصٌ",
-      options: ["Rok", "baju", "Celana", "Topi"],
+      options: ["Rok", "Kemeja", "Celana", "Topi"],
       answer: 1
     },
     {
@@ -372,11 +399,11 @@
     {
       q: "Apa arti dari kata berikut?",
       arabic: "تَنُّورَةٌ",
-      options: ["Celana", "baju", "Rok", "Jaket"],
+      options: ["Celana", "Kemeja", "Rok", "Jaket"],
       answer: 2
     },
     {
-      q: "Bahasa Arab dari 'baju' adalah...",
+      q: "Bahasa Arab dari 'Kemeja' adalah...",
       arabic: null,
       options: ["سِرْوَالٌ", "تَنُّورَةٌ", "قَمِيصٌ", "كِتَابٌ"],
       answer: 2
@@ -388,7 +415,7 @@
       answer: 1
     },
     {
-      q: "Lengkapi kalimat: هَذَا ....... (Ini adalah baju)",
+      q: "Lengkapi kalimat: هَذَا ....... (Ini adalah kemeja)",
       arabic: null,
       options: ["سِرْوَالٌ", "تَنُّورَةٌ", "قَمِيصٌ", "بَابٌ"],
       answer: 2
