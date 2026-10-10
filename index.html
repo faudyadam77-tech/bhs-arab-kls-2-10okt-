@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<title>الزِّي الْمَدْرَسِيُّ - Seragam Sekolah</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, sans-serif; }
+  body {
+    background: linear-gradient(135deg, #e8f5e9 0%, #f1f8e9 100%);
+    min-height: 100vh;
+    padding: 20px;
+    color: #2e4a3e;
+  }
+  .container {
+    max-width: 900px;
+    margin: 0 auto;
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+    overflow: hidden;
+  }
+  header {
+    background: linear-gradient(135deg, #2e7d32, #43a047);
+    color: white;
+    padding: 40px 30px;
+    text-align: center;
+  }
+  header h1 {
+    font-size: 2.5em;
+    margin-bottom: 10px;
+    font-family: 'Traditional Arabic', 'Amiri', serif;
+  }
+  header p {
+    font-size: 1.2em;
+    opacity: 0.95;
+  }
+  .nav-tabs {
+    display: flex;
+    background: #f5f5f5;
+    border-bottom: 2px solid #e0e0e0;
+  }
+  .nav-tabs button {
+    flex: 1;
+    padding: 18px;
+    border: none;
+    background: transparent;
+    font-size: 1.05em;
+    font-weight: 600;
+    color: #666;
+    cursor: pointer;
+    transition: all 0.3s;
+  }
+  .nav-tabs button:hover { background: #e8f5e9; }
+  .nav-tabs button.active {
+    background: white;
+    color: #2e7d32;
+    border-bottom: 3px solid #2e7d32;
+  }
+  .content { padding: 40px 30px; }
+  .section { display: none; animation: fadeIn 0.5s; }
+  .section.active { display: block; }
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  h2 {
+    color: #2e7d32;
+    margin-bottom: 25px;
+    font-size: 1.8em;
+    border-left: 5px solid #43a047;
+    padding-left: 15px;
+  }
+  .vocab-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 25px;
+    margin-top: 20px;
+  }
+  .vocab-card {
+    background: linear-gradient(135deg, #f1f8e9, #dcedc8);
+    border-radius: 15px;
+    padding: 25px 20px;
+    text-align: center;
+    transition: transform 0.3s, box-shadow 0.3s;
+    cursor: pointer;
+    border: 2px solid transparent;
+  }
+  .vocab-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(46,125,50,0.2);
+    border-color: #43a047;
+  }
+  .vocab-image {
+    width: 100%;
+    height: 220px;
+    border-radius: 10px;
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    background: white;
+    border: 1px solid #e0e0e0;
+    padding: 10px;
+  }
+  .vocab-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    transition: transform 0.3s;
+  }
+  .vocab-card:hover .vocab-image img {
+    transform: scale(1.08);
+  }
+  .arabic-word {
+    font-size: 2.2em;
+    color: #1b5e20;
+    margin: 10px 0;
+    font-family: 'Traditional Arabic', 'Amiri', serif;
+  }
+  .latin-word {
+    font-size: 1.1em;
+    color: #558b2f;
+    font-style: italic;
+    margin-bottom: 8px;
+  }
+  .meaning {
+    font-size: 1.1em;
+    color: #333;
+    font-weight: 600;
+  }
+  .sentence-box {
+    background: #f9fbe7;
+    border-left: 5px solid #8bc34a;
+    padding: 20px 25px;
+    margin: 20px 0;
+    border-radius: 10px;
+  }
+  .sentence-arabic {
+    font-size: 1.8em;
+    color: #1b5e20;
+    margin-bottom: 8px;
+    font-family: 'Traditional Arabic', 'Amiri', serif;
+  }
+  .sentence-latin {
+    color: #558b2f;
+    font-style: italic;
+    margin-bottom: 5px;
+  }
+  .sentence-meaning {
+    color: #555;
+  }
+  .quiz-container { margin-top: 20px; }
+  .question {
+    background: #f5f5f5;
+    padding: 25px;
+    border-radius: 15px;
+    margin-bottom: 20px;
+    border-left: 5px solid #43a047;
+  }
+  .question-number {
+    display: inline-block;
+    background: #2e7d32;
+    color: white;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 35px;
+    font-weight: bold;
+    margin-right: 10px;
+  }
+  .question-text {
+    font-size: 1.15em;
+    margin-bottom: 15px;
+    font-weight: 600;
+  }
+  .question-arabic {
+    font-size: 1.6em;
+    color: #1b5e20;
+    text-align: center;
+    margin: 15px 0;
+    font-family: 'Traditional Arabic', 'Amiri', serif;
+  }
+  .options {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+  .option {
+    padding: 12px 18px;
+    background: white;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-size: 1em;
+  }
+  .option:hover:not(.disabled) {
+    border-color: #43a047;
+    background: #f1f8e9;
+  }
+  .option.correct {
+    background: #c8e6c9;
+    border-color: #2e7d32;
+    color: #1b5e20;
+    font-weight: 600;
+  }
+  .option.wrong {
+    background: #ffcdd2;
+    border-color: #c62828;
+    color: #b71c1c;
+  }
+  .option.disabled { cursor: not-allowed; }
+  .feedback {
+    margin-top: 10px;
+    padding: 10px;
+    border-radius: 8px;
+    font-weight: 600;
+    display: none;
+  }
+  .feedback.show { display: block; }
+  .feedback.correct { background: #e8f5e9; color: #1b5e20; }
+  .feedback.wrong { background: #ffebee; color: #b71c1c; }
+  .result-box {
+    background: linear-gradient(135deg, #2e7d32, #43a047);
+    color: white;
+    padding: 30px;
+    border-radius: 15px;
+    text-align: center;
+    margin-top: 20px;
+    display: none;
+  }
+  .result-box.show { display: block; }
+  .result-box h3 { font-size: 2em; margin-bottom: 10px; }
+  .result-box p { font-size: 1.2em; }
+  .btn-reset {
+    background: white;
+    color: #2e7d32;
+    border: none;
+    padding: 12px 30px;
+    border-radius: 25px;
+    font-size: 1em;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 15px;
+    transition: transform 0.2s;
+  }
+  .btn-reset:hover { transform: scale(1.05); }
+  footer {
+    text-align: center;
+    padding: 20px;
+    color: #888;
+    font-size: 0.9em;
+  }
+  @media (max-width: 600px) {
+    .options { grid-template-columns: 1fr; }
+    header h1 { font-size: 1.8em; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+  <header>
+    <h1>الزِّي الْمَدْرَسِيُّ</h1>
+    <p>Seragam Sekolah • Kelas 2 MI/SD</p>
+  </header>
+
+  <div class="nav-tabs">
+    <button class="active" onclick="showSection('kosakata', this)">Kosakata</button>
+    <button onclick="showSection('kalimat', this)">Kalimat</button>
+    <button onclick="showSection('latihan', this)">Latihan</button>
+  </div>
+
+  <div class="content">
+    <!-- KOSAKATA -->
+    <div id="kosakata" class="section active">
+      <h2>Kosakata Baru</h2>
+      <p style="margin-bottom:20px; color:#555;">Klik setiap kartu untuk mendengar cara bacanya (baca dengan lantang!)</p>
+      <div class="vocab-grid">
+        <div class="vocab-card" onclick="speak('قَمِيصٌ')">
+          <div class="vocab-image">
+            <img src="https://cdn.jsdelivr.net/gh/faudyadam77-tech/Kumpulan-gambar@main/baju.jpg" alt="Kemeja Putih">
+          </div>
+          <div class="arabic-word">قَمِيصٌ</div>
+          <div class="latin-word">Qamiishun</div>
+          <div class="meaning">Kemeja / Baju</div>
+        </div>
+        <div class="vocab-card" onclick="speak('سِرْوَالٌ')">
+          <div class="vocab-image">
+            <img src="https://cdn.jsdelivr.net/gh/faudyadam77-tech/Kumpulan-gambar@main/celana.jpg" alt="Celana Hijau">
+          </div>
+          <div class="arabic-word">سِرْوَالٌ</div>
+          <div class="latin-word">Sirwaalun</div>
+          <div class="meaning">Celana</div>
+        </div>
+        <div class="vocab-card" onclick="speak('تَنُّورَةٌ')">
+          <div class="vocab-image">
+            <img src="https://cdn.jsdelivr.net/gh/faudyadam77-tech/Kumpulan-gambar@main/rok.jpg" alt="Rok Hijau">
+          </div>
+          <div class="arabic-word">تَنُّورَةٌ</div>
+          <div class="latin-word">Tannuuratun</div>
+          <div class="meaning">Rok</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- KALIMAT -->
+    <div id="kalimat" class="section">
+      <h2>Kalimat Sederhana</h2>
+      <p style="margin-bottom:20px; color:#555;">Pelajari cara membuat kalimat pendek tentang seragam sekolah.</p>
+      
+      <div class="sentence-box">
+        <div class="sentence-arabic">هَذَا قَمِيصٌ</div>
+        <div class="sentence-latin">Haa-dzaa qamiishun</div>
+        <div class="sentence-meaning">Ini adalah kemeja.</div>
+      </div>
+
+      <div class="sentence-box">
+        <div class="sentence-arabic">هَذَا سِرْوَالٌ</div>
+        <div class="sentence-latin">Haa-dzaa sirwaalun</div>
+        <div class="sentence-meaning">Ini adalah celana.</div>
+      </div>
+
+      <div class="sentence-box">
+        <div class="sentence-arabic">هَذِهِ تَنُّورَةٌ</div>
+        <div class="sentence-latin">Haa-dzihi tannuuratun</div>
+        <div class="sentence-meaning">Ini adalah rok.</div>
+      </div>
+
+      <div style="background:#fff3e0; padding:20px; border-radius:10px; margin-top:25px; border-left:5px solid #ff9800;">
+        <strong style="color:#e65100;">Catatan Penting:</strong>
+        <p style="margin-top:10px; color:#555;">
+          Gunakan <strong>هَذَا</strong> (Haa-dzaa) untuk benda laki-laki seperti kemeja dan celana.<br>
+          Gunakan <strong>هَذِهِ</strong> (Haa-dzihi) untuk benda perempuan seperti rok.
+        </p>
+      </div>
+    </div>
+
+    <!-- LATIHAN -->
+    <div id="latihan" class="section">
+      <h2>Latihan Soal</h2>
+      <p style="margin-bottom:20px; color:#555;">Jawab 7 soal berikut dengan memilih jawaban yang benar!</p>
+      <div class="quiz-container" id="quizContainer"></div>
+      <div class="result-box" id="resultBox">
+        <h3 id="resultTitle">Selesai!</h3>
+        <p id="resultText"></p>
+        <button class="btn-reset" onclick="resetQuiz()">Coba Lagi</button>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    Bahasa Arab untuk MI Kelas II • Materi Interaktif
+  </footer>
+</div>
+
+<script>
+  const questions = [
+    {
+      q: "Apa arti dari kata berikut?",
+      arabic: "قَمِيصٌ",
+      options: ["Rok", "Kemeja", "Celana", "Topi"],
+      answer: 1
+    },
+    {
+      q: "Apa arti dari kata berikut?",
+      arabic: "سِرْوَالٌ",
+      options: ["Celana", "Baju", "Rok", "Sepatu"],
+      answer: 0
+    },
+    {
+      q: "Apa arti dari kata berikut?",
+      arabic: "تَنُّورَةٌ",
+      options: ["Celana", "Kemeja", "Rok", "Jaket"],
+      answer: 2
+    },
+    {
+      q: "Bahasa Arab dari 'Kemeja' adalah...",
+      arabic: null,
+      options: ["سِرْوَالٌ", "تَنُّورَةٌ", "قَمِيصٌ", "كِتَابٌ"],
+      answer: 2
+    },
+    {
+      q: "Bahasa Arab dari 'Celana' adalah...",
+      arabic: null,
+      options: ["قَمِيصٌ", "سِرْوَالٌ", "تَنُّورَةٌ", "قَلَمٌ"],
+      answer: 1
+    },
+    {
+      q: "Lengkapi kalimat: هَذَا ....... (Ini adalah kemeja)",
+      arabic: null,
+      options: ["سِرْوَالٌ", "تَنُّورَةٌ", "قَمِيصٌ", "بَابٌ"],
+      answer: 2
+    },
+    {
+      q: "Kalimat 'Ini adalah rok' dalam bahasa Arab adalah...",
+      arabic: null,
+      options: ["هَذَا قَمِيصٌ", "هَذِهِ تَنُّورَةٌ", "هَذَا سِرْوَالٌ", "هَذِهِ مِدْرَسَةٌ"],
+      answer: 1
+    }
+  ];
+
+  let score = 0;
+  let answered = 0;
+
+  function renderQuiz() {
+    const container = document.getElementById('quizContainer');
+    container.innerHTML = '';
+    questions.forEach((q, idx) => {
+      const div = document.createElement('div');
+      div.className = 'question';
+      let html = `<div class="question-text"><span class="question-number">${idx+1}</span>${q.q}</div>`;
+      if (q.arabic) html += `<div class="question-arabic">${q.arabic}</div>`;
+      html += `<div class="options">`;
+      q.options.forEach((opt, i) => {
+        html += `<div class="option" onclick="selectAnswer(${idx}, ${i}, this)">${opt}</div>`;
+      });
+      html += `</div><div class="feedback" id="feedback-${idx}"></div>`;
+      div.innerHTML = html;
+      container.appendChild(div);
+    });
+  }
+
+  function selectAnswer(qIdx, optIdx, el) {
+    const question = questions[qIdx];
+    const options = el.parentElement.querySelectorAll('.option');
+    const feedback = document.getElementById(`feedback-${qIdx}`);
+    
+    if (el.classList.contains('disabled')) return;
+    
+    options.forEach(o => o.classList.add('disabled'));
+    
+    if (optIdx === question.answer) {
+      el.classList.add('correct');
+      feedback.textContent = "✓ Benar! Hebat!";
+      feedback.className = 'feedback show correct';
+      score++;
+    } else {
+      el.classList.add('wrong');
+      options[question.answer].classList.add('correct');
+      feedback.textContent = `✗ Kurang tepat. Jawaban yang benar: ${question.options[question.answer]}`;
+      feedback.className = 'feedback show wrong';
+    }
+    
+    answered++;
+    if (answered === questions.length) showResult();
+  }
+
+  function showResult() {
+    const box = document.getElementById('resultBox');
+    const title = document.getElementById('resultTitle');
+    const text = document.getElementById('resultText');
+    box.classList.add('show');
+    
+    let message = '';
+    if (score === 7) message = 'Sempurna! Kamu luar biasa! 🌟';
+    else if (score >= 5) message = 'Bagus sekali! Terus berlatih! 👍';
+    else if (score >= 3) message = 'Lumayan! Ayo belajar lagi! 📖';
+    else message = 'Jangan menyerah! Coba lagi ya! 📚';
+    
+    title.textContent = `Skor: ${score}/7`;
+    text.textContent = message;
+    box.scrollIntoView({behavior: 'smooth'});
+  }
+
+  function resetQuiz() {
+    score = 0;
+    answered = 0;
+    document.getElementById('resultBox').classList.remove('show');
+    renderQuiz();
+    window.scrollTo({top: 0, behavior: 'smooth'});
+  }
+
+  function showSection(id, btn) {
+    document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+    document.querySelectorAll('.nav-tabs button').forEach(b => b.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+    btn.classList.add('active');
+  }
+
+  function speak(text) {
+    if ('speechSynthesis' in window) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      utterance.lang = 'ar-SA';
+      utterance.rate = 0.8;
+      speechSynthesis.speak(utterance);
+    }
+  }
+
+  renderQuiz();
+</script>
+</body>
+</html>
