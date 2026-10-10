@@ -2,267 +2,429 @@
 <html lang="id">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>الزِّي الْمَدْرَسِيُّ - Seragam Sekolah</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Quicksand:wght@500;600;700&display=swap" rel="stylesheet">
 <style>
-  * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, sans-serif; }
+  :root {
+    --primary: #10B981;
+    --primary-dark: #059669;
+    --primary-light: #ECFDF5;
+    --accent: #F59E0B;
+    --text-main: #1F2937;
+    --text-muted: #6B7280;
+    --bg-gradient: linear-gradient(135deg, #F0FDF4 100%, #E6F4EA 0%);
+    --card-bg: #FFFFFF;
+    --shadow-sm: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+    --shadow-md: 0 10px 25px -5px rgba(16, 185, 129, 0.1), 0 8px 10px -6px rgba(16, 185, 129, 0.1);
+    --radius-lg: 24px;
+    --radius-md: 16px;
+    --radius-sm: 12px;
+  }
+
+  * { 
+    margin: 0; 
+    padding: 0; 
+    box-sizing: border-box; 
+    font-family: 'Quicksand', sans-serif; 
+  }
+
   body {
-    background: linear-gradient(135deg, #e8f5e9 0%, #f1f8e9 100%);
+    background: var(--bg-gradient);
     min-height: 100vh;
-    padding: 20px;
-    color: #2e4a3e;
+    padding: 24px 16px;
+    color: var(--text-main);
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
+
   .container {
+    width: 100%;
     max-width: 900px;
-    margin: 0 auto;
-    background: white;
-    border-radius: 20px;
-    box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+    background: var(--card-bg);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-md);
     overflow: hidden;
+    border: 1px solid rgba(16, 185, 129, 0.15);
   }
+
   header {
-    background: linear-gradient(135deg, #2e7d32, #43a047);
+    background: linear-gradient(135deg, #059669 0%, #10B981 100%);
     color: white;
-    padding: 40px 30px;
+    padding: 36px 24px;
     text-align: center;
     position: relative;
+    overflow: hidden;
   }
+
+  header::after {
+    content: '';
+    position: absolute;
+    bottom: -50px;
+    right: -50px;
+    width: 150px;
+    height: 150px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+  }
+
   header h1 {
-    font-size: 2.5em;
-    margin-bottom: 10px;
-    font-family: 'Traditional Arabic', 'Amiri', serif;
+    font-size: 2.8rem;
+    margin-bottom: 8px;
+    font-family: 'Amiri', serif;
+    letter-spacing: 1px;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.1);
   }
+
   header p {
-    font-size: 1.2em;
+    font-size: 1.15rem;
+    font-weight: 600;
     opacity: 0.95;
+    background: rgba(0, 0, 0, 0.1);
+    display: inline-block;
+    padding: 6px 18px;
+    border-radius: 20px;
   }
+
   .nav-tabs {
     display: flex;
-    background: #f5f5f5;
-    border-bottom: 2px solid #e0e0e0;
+    background: #F9FAFB;
+    border-bottom: 2px solid #E5E7EB;
+    padding: 6px;
+    gap: 6px;
   }
+
   .nav-tabs button {
     flex: 1;
-    padding: 18px;
+    padding: 14px;
     border: none;
     background: transparent;
-    font-size: 1.05em;
-    font-weight: 600;
-    color: #666;
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--text-muted);
     cursor: pointer;
-    transition: all 0.3s;
+    border-radius: var(--radius-sm);
+    transition: all 0.25s ease;
   }
-  .nav-tabs button:hover { background: #e8f5e9; }
+
+  .nav-tabs button:hover { 
+    background: var(--primary-light); 
+    color: var(--primary-dark);
+  }
+
   .nav-tabs button.active {
     background: white;
-    color: #2e7d32;
-    border-bottom: 3px solid #2e7d32;
+    color: var(--primary-dark);
+    box-shadow: var(--shadow-sm);
+    border-bottom: 3px solid var(--primary);
   }
-  .content { padding: 40px 30px; }
-  .section { display: none; animation: fadeIn 0.5s; }
-  .section.active { display: block; }
+
+  .content { 
+    padding: 36px 28px; 
+  }
+
+  .section { 
+    display: none; 
+    animation: fadeIn 0.4s cubic-bezier(0.16, 1, 0.3, 1); 
+  }
+
+  .section.active { 
+    display: block; 
+  }
+
   @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(10px); }
+    from { opacity: 0; transform: translateY(8px); }
     to { opacity: 1; transform: translateY(0); }
   }
+
   h2 {
-    color: #2e7d32;
-    margin-bottom: 25px;
-    font-size: 1.8em;
-    border-left: 5px solid #43a047;
-    padding-left: 15px;
+    color: var(--primary-dark);
+    margin-bottom: 20px;
+    font-size: 1.8rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 12px;
   }
+
+  h2::before {
+    content: '';
+    width: 6px;
+    height: 28px;
+    background: var(--primary);
+    border-radius: 4px;
+  }
+
   .vocab-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-    gap: 25px;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 24px;
     margin-top: 20px;
   }
+
   .vocab-card {
-    background: linear-gradient(135deg, #f1f8e9, #dcedc8);
-    border-radius: 15px;
-    padding: 25px 20px;
+    background: linear-gradient(135deg, #FFFFFF 0%, #F8FAFC 100%);
+    border-radius: var(--radius-md);
+    padding: 24px 20px;
     text-align: center;
-    transition: transform 0.3s, box-shadow 0.3s;
+    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
     cursor: pointer;
-    border: 2px solid transparent;
+    border: 2px solid #E5E7EB;
+    box-shadow: var(--shadow-sm);
+    position: relative;
+    overflow: hidden;
   }
+
   .vocab-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 25px rgba(46,125,50,0.2);
-    border-color: #43a047;
+    transform: translateY(-6px);
+    box-shadow: var(--shadow-md);
+    border-color: var(--primary);
   }
+
   .vocab-image {
     width: 100%;
-    height: 220px;
-    border-radius: 10px;
-    margin-bottom: 15px;
+    height: 190px;
+    border-radius: var(--radius-sm);
+    margin-bottom: 16px;
     display: flex;
     align-items: center;
     justify-content: center;
     overflow: hidden;
-    background: white;
-    border: 1px solid #e0e0e0;
+    background: #F3F4F6;
+    border: 1px solid #E5E7EB;
     padding: 10px;
   }
+
   .vocab-image img {
     width: 100%;
     height: 100%;
     object-fit: contain;
-    transition: transform 0.3s;
+    transition: transform 0.4s ease;
   }
+
   .vocab-card:hover .vocab-image img {
     transform: scale(1.08);
   }
+
   .arabic-word {
-    font-size: 2.2em;
-    color: #1b5e20;
-    margin: 10px 0;
-    font-family: 'Traditional Arabic', 'Amiri', serif;
+    font-size: 2.4rem;
+    color: var(--primary-dark);
+    margin: 8px 0;
+    font-family: 'Amiri', serif;
+    font-weight: 700;
   }
+
   .latin-word {
-    font-size: 1.1em;
-    color: #558b2f;
+    font-size: 1.1rem;
+    color: var(--primary);
+    font-weight: 600;
     font-style: italic;
-    margin-bottom: 8px;
+    margin-bottom: 6px;
   }
+
   .meaning {
-    font-size: 1.1em;
-    color: #333;
-    font-weight: 600;
+    font-size: 1.15rem;
+    color: var(--text-main);
+    font-weight: 700;
   }
+
   .sentence-box {
-    background: #f9fbe7;
-    border-left: 5px solid #8bc34a;
-    padding: 20px 25px;
+    background: var(--primary-light);
+    border-left: 5px solid var(--primary);
+    padding: 22px 24px;
     margin: 20px 0;
-    border-radius: 10px;
+    border-radius: var(--radius-sm);
+    box-shadow: var(--shadow-sm);
+    transition: transform 0.2s;
   }
+
+  .sentence-box:hover {
+    transform: translateX(4px);
+  }
+
   .sentence-arabic {
-    font-size: 1.8em;
-    color: #1b5e20;
+    font-size: 2rem;
+    color: var(--primary-dark);
     margin-bottom: 8px;
-    font-family: 'Traditional Arabic', 'Amiri', serif;
+    font-family: 'Amiri', serif;
+    font-weight: 700;
   }
+
   .sentence-latin {
-    color: #558b2f;
+    color: #047857;
     font-style: italic;
-    margin-bottom: 5px;
+    font-weight: 600;
+    margin-bottom: 4px;
   }
+
   .sentence-meaning {
-    color: #555;
-  }
-  .quiz-container { margin-top: 20px; }
-  .question {
-    background: #f5f5f5;
-    padding: 25px;
-    border-radius: 15px;
-    margin-bottom: 20px;
-    border-left: 5px solid #43a047;
-  }
-  .question-number {
-    display: inline-block;
-    background: #2e7d32;
-    color: white;
-    width: 35px;
-    height: 35px;
-    border-radius: 50%;
-    text-align: center;
-    line-height: 35px;
-    font-weight: bold;
-    margin-right: 10px;
-  }
-  .question-text {
-    font-size: 1.15em;
-    margin-bottom: 15px;
+    color: #374151;
     font-weight: 600;
   }
-  .question-arabic {
-    font-size: 1.6em;
-    color: #1b5e20;
-    text-align: center;
-    margin: 15px 0;
-    font-family: 'Traditional Arabic', 'Amiri', serif;
+
+  .quiz-container { 
+    margin-top: 20px; 
   }
+
+  .question {
+    background: #F9FAFB;
+    padding: 28px;
+    border-radius: var(--radius-md);
+    margin-bottom: 24px;
+    border: 1px solid #E5E7EB;
+    box-shadow: var(--shadow-sm);
+  }
+
+  .question-number {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--primary);
+    color: white;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    font-weight: 700;
+    margin-right: 12px;
+    font-size: 1rem;
+    box-shadow: 0 2px 4px rgba(16, 185, 129, 0.3);
+  }
+
+  .question-text {
+    font-size: 1.2rem;
+    margin-bottom: 16px;
+    font-weight: 700;
+    color: var(--text-main);
+    display: flex;
+    align-items: center;
+  }
+
+  .question-arabic {
+    font-size: 2.2rem;
+    color: var(--primary-dark);
+    text-align: center;
+    margin: 16px 0;
+    font-family: 'Amiri', serif;
+    font-weight: 700;
+    background: white;
+    padding: 12px;
+    border-radius: var(--radius-sm);
+    border: 1px dashed var(--primary);
+  }
+
   .options {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 10px;
+    gap: 12px;
+    margin-top: 16px;
   }
+
   .option {
-    padding: 12px 18px;
+    padding: 14px 20px;
     background: white;
-    border: 2px solid #ddd;
-    border-radius: 8px;
+    border: 2px solid #E5E7EB;
+    border-radius: var(--radius-sm);
     cursor: pointer;
-    transition: all 0.2s;
-    font-size: 1em;
-  }
-  .option:hover:not(.disabled) {
-    border-color: #43a047;
-    background: #f1f8e9;
-  }
-  .option.correct {
-    background: #c8e6c9;
-    border-color: #2e7d32;
-    color: #1b5e20;
+    transition: all 0.2s ease;
+    font-size: 1.05rem;
     font-weight: 600;
-  }
-  .option.wrong {
-    background: #ffcdd2;
-    border-color: #c62828;
-    color: #b71c1c;
-  }
-  .option.disabled { cursor: not-allowed; }
-  .feedback {
-    margin-top: 10px;
-    padding: 10px;
-    border-radius: 8px;
-    font-weight: 600;
-    display: none;
-  }
-  .feedback.show { display: block; }
-  .feedback.correct { background: #e8f5e9; color: #1b5e20; }
-  .feedback.wrong { background: #ffebee; color: #b71c1c; }
-  .result-box {
-    background: linear-gradient(135deg, #2e7d32, #43a047);
-    color: white;
-    padding: 30px;
-    border-radius: 15px;
+    color: var(--text-main);
     text-align: center;
-    margin-top: 20px;
-    display: none;
   }
-  .result-box.show { display: block; }
-  .result-box h3 { font-size: 2em; margin-bottom: 10px; }
-  .result-box p { font-size: 1.2em; }
+
+  .option:hover:not(.disabled) {
+    border-color: var(--primary);
+    background: var(--primary-light);
+    color: var(--primary-dark);
+  }
+
+  .option.correct {
+    background: #D1FAE5 !important;
+    border-color: var(--primary) !important;
+    color: #065F46 !important;
+    font-weight: 700;
+  }
+
+  .option.wrong {
+    background: #FEE2E2 !important;
+    border-color: #EF4444 !important;
+    color: #B91C1C !important;
+  }
+
+  .option.disabled { 
+    cursor: not-allowed; 
+    opacity: 0.85;
+  }
+
+  .feedback {
+    margin-top: 14px;
+    padding: 12px 16px;
+    border-radius: var(--radius-sm);
+    font-weight: 700;
+    display: none;
+    font-size: 1.05rem;
+  }
+
+  .feedback.show { display: block; }
+  .feedback.correct { background: #D1FAE5; color: #065F46; border: 1px solid #A7F3D0; }
+  .feedback.wrong { background: #FEE2E2; color: #B91C1C; border: 1px solid #FECACA; }
+
+  .result-box {
+    background: linear-gradient(135deg, #059669 0%, #10B981 100%);
+    color: white;
+    padding: 36px;
+    border-radius: var(--radius-md);
+    text-align: center;
+    margin-top: 24px;
+    display: none;
+    box-shadow: var(--shadow-md);
+  }
+
+  .result-box.show { display: block; animation: fadeIn 0.5s ease; }
+  .result-box h3 { font-size: 2.2rem; margin-bottom: 10px; font-weight: 700; }
+  .result-box p { font-size: 1.25rem; margin-bottom: 20px; }
+
   .btn-reset {
     background: white;
-    color: #2e7d32;
+    color: var(--primary-dark);
     border: none;
-    padding: 12px 30px;
-    border-radius: 25px;
-    font-size: 1em;
-    font-weight: 600;
+    padding: 14px 32px;
+    border-radius: 30px;
+    font-size: 1.1rem;
+    font-weight: 700;
     cursor: pointer;
-    margin-top: 15px;
-    transition: transform 0.2s;
+    box-shadow: var(--shadow-sm);
+    transition: transform 0.2s, background 0.2s;
   }
-  .btn-reset:hover { transform: scale(1.05); }
+
+  .btn-reset:hover { 
+    transform: scale(1.05); 
+    background: #F9FAFB;
+  }
+
   footer {
     text-align: center;
-    padding: 20px;
-    color: #888;
-    font-size: 0.9em;
+    padding: 24px;
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    font-weight: 600;
+    border-top: 1px solid #E5E7EB;
+    background: #F9FAFB;
   }
+
   @media (max-width: 600px) {
     .options { grid-template-columns: 1fr; }
-    header h1 { font-size: 1.8em; }
+    header h1 { font-size: 2.2rem; }
+    body { padding: 12px; }
+    .content { padding: 20px 16px; }
   }
 </style>
 </head>
 <body>
 
-<!-- Audio Latar Belakang (Looping) -->
 <audio id="bgAudio" src="https://cdn.jsdelivr.net/gh/faudyadam77-tech/Suara-solat@main/alkafirun.mp3" loop></audio>
 
 <div class="container">
@@ -281,11 +443,11 @@
     <!-- KOSAKATA -->
     <div id="kosakata" class="section active">
       <h2>Kosakata Baru</h2>
-      <p style="margin-bottom:20px; color:#555;">Klik setiap kartu untuk mendengar cara bacanya (baca dengan lantang!)</p>
+      <p style="margin-bottom:24px; color:var(--text-muted); font-weight:600;">Klik setiap kartu untuk mendengar cara bacanya (baca dengan lantang!)</p>
       <div class="vocab-grid">
         <div class="vocab-card" onclick="speak('قَمِيصٌ')">
           <div class="vocab-image">
-            <img src="https://cdn.jsdelivr.net/gh/faudyadam77-tech/Kumpulan-gambar@main/baju.jpg" alt="Kemeja Putih">
+            <img src="https://cdn.jsdelivr.net/gh/faudyadam77-tech/Kumpulan-gambar@main/baju.jpg" alt="Kemeja Putih" onerror="this.src='https://placehold.co/200x180/E5E7EB/374151?text=Kemeja'">
           </div>
           <div class="arabic-word">قَمِيصٌ</div>
           <div class="latin-word">Qamiishun</div>
@@ -293,7 +455,7 @@
         </div>
         <div class="vocab-card" onclick="speak('سِرْوَالٌ')">
           <div class="vocab-image">
-            <img src="https://cdn.jsdelivr.net/gh/faudyadam77-tech/Kumpulan-gambar@main/celana.jpg" alt="Celana Hijau">
+            <img src="https://cdn.jsdelivr.net/gh/faudyadam77-tech/Kumpulan-gambar@main/celana.jpg" alt="Celana Hijau" onerror="this.src='https://placehold.co/200x180/E5E7EB/374151?text=Celana'">
           </div>
           <div class="arabic-word">سِرْوَالٌ</div>
           <div class="latin-word">Sirwaalun</div>
@@ -301,7 +463,7 @@
         </div>
         <div class="vocab-card" onclick="speak('تَنُّورَةٌ')">
           <div class="vocab-image">
-            <img src="https://cdn.jsdelivr.net/gh/faudyadam77-tech/Kumpulan-gambar@main/rok.jpg" alt="Rok Hijau">
+            <img src="https://cdn.jsdelivr.net/gh/faudyadam77-tech/Kumpulan-gambar@main/rok.jpg" alt="Rok Hijau" onerror="this.src='https://placehold.co/200x180/E5E7EB/374151?text=Rok'">
           </div>
           <div class="arabic-word">تَنُّورَةٌ</div>
           <div class="latin-word">Tannuuratun</div>
@@ -313,7 +475,7 @@
     <!-- KALIMAT -->
     <div id="kalimat" class="section">
       <h2>Kalimat Sederhana</h2>
-      <p style="margin-bottom:20px; color:#555;">Pelajari cara membuat kalimat pendek tentang seragam sekolah.</p>
+      <p style="margin-bottom:24px; color:var(--text-muted); font-weight:600;">Pelajari cara membuat kalimat pendek tentang seragam sekolah.</p>
       
       <div class="sentence-box">
         <div class="sentence-arabic">هَذَا قَمِيصٌ</div>
@@ -333,9 +495,9 @@
         <div class="sentence-meaning">Ini adalah rok.</div>
       </div>
 
-      <div style="background:#fff3e0; padding:20px; border-radius:10px; margin-top:25px; border-left:5px solid #ff9800;">
-        <strong style="color:#e65100;">Catatan Penting:</strong>
-        <p style="margin-top:10px; color:#555;">
+      <div style="background:#FEF3C7; padding:24px; border-radius:var(--radius-sm); margin-top:28px; border-left:5px solid #F59E0B; box-shadow: var(--shadow-sm);">
+        <strong style="color:#B45309; font-size:1.1rem;">Catatan Penting:</strong>
+        <p style="margin-top:8px; color:#4B5563; font-weight:600; line-height:1.6;">
           Gunakan <strong>هَذَا</strong> (Haa-dzaa) untuk benda laki-laki seperti kemeja dan celana.<br>
           Gunakan <strong>هَذِهِ</strong> (Haa-dzihi) untuk benda perempuan seperti rok.
         </p>
@@ -345,7 +507,7 @@
     <!-- LATIHAN -->
     <div id="latihan" class="section">
       <h2>Latihan Soal</h2>
-      <p style="margin-bottom:20px; color:#555;">Jawab 7 soal berikut dengan memilih jawaban yang benar!</p>
+      <p style="margin-bottom:24px; color:var(--text-muted); font-weight:600;">Jawab 7 soal berikut dengan memilih jawaban yang benar!</p>
       <div class="quiz-container" id="quizContainer"></div>
       <div class="result-box" id="resultBox">
         <h3 id="resultTitle">Selesai!</h3>
